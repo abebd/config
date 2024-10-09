@@ -30,3 +30,19 @@ map <C-b> :NERDTreeToggle<cr>
 map <C-ö> :terminal<cr>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+" <Tab>: completion
+inoremap <silent><expr> <Tab>
+    \ pumvisible() ? "\<C-N>" :
+    \ Check_back_space() ? "\<Tab>" :
+    \ coc#refresh()
+" <S-Tab>: completion back
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
+" <CR>: confirm completion, or insert <CR>
+inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+
+function! Check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1] =~ '\s'
+endfunction
+
