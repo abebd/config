@@ -1,0 +1,2 @@
+[2m2024-10-27T16:08:03.347994Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m gaps.outer_gap: invalid type: string "2px", expected struct RectDelta at line 38 column 14
+[2m2024-10-27T16:18:04.413890Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
