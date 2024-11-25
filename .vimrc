@@ -1,3 +1,11 @@
+" --@changelog/
+" 	when		what
+"	2024-11-19	new scheme and other shit
+"	2024-10-09	tab auto complete
+"	2024-10-06	added ctrlp.vim
+"	2024-10-03	initial commit
+" --@changelog-end/
+" --@main/
 "Plugins
 call plug#begin()
     Plug 'tpope/vim-sensible'
@@ -77,4 +85,4 @@ function! Check_back_space() abort
     return !col || getline('.')[col - 1] =~ '\s'
 endfunction
 let g:startify_bookmarks = [ {'c': '~/.vimrc'}, {'x': 'H:\docs\notes.txt'}]
-
+" --@main-end/
