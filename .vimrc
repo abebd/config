@@ -1,5 +1,7 @@
 " --@changelog/
 " 	when		what
+"   2025-03-18  add expandtab
+"	2025-02-21	new schemes
 "	2024-11-19	new scheme and other shit
 "	2024-10-09	tab auto complete
 "	2024-10-06	added ctrlp.vim
@@ -9,13 +11,18 @@
 "Plugins
 call plug#begin()
     Plug 'tpope/vim-sensible'
-    Plug 'morhetz/gruvbox'
-    Plug 'sainnhe/gruvbox-material'
-    Plug 'joshdick/onedark.vim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'jiangmiao/auto-pairs'
     Plug 'kien/ctrlp.vim'
     Plug 'mhinz/vim-startify'
+
+	"themes
+	Plug 'LuRsT/austere.vim'
+    Plug 'morhetz/gruvbox'
+    Plug 'sainnhe/gruvbox-material'
+    Plug 'joshdick/onedark.vim'
+	Plug 'davidosomething/vim-colors-meh'
+	Plug 'kvrohit/rasmus.nvim'
 call plug#end()
  
 set number
@@ -28,7 +35,8 @@ set belloff=all
 set paste "allow copy paste
 set autoindent
 set scrolloff=5
-
+set expandtab
+set ignorecase
 "colorcolumn stuff
 "doesnt work
 "set colorcolumn=80
@@ -45,13 +53,17 @@ set guioptions-=m
 set guioptions-=T
 set guioptions=Ace
  
-" Colorscheme
-colorscheme onedark
+" Colorschemes
+
+"colorscheme onedark
+
 "colorscheme gruvbox
-set bg=dark
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_material_foreground = 'material'
+"set bg=dark
+"let g:gruvbox_contrast_dark = 'hard'
+"let g:gruvbox_material_foreground = 'material'
  
+colorscheme meh
+
 "For rust syntax highlighting
 syntax enable
 filetype plugin indent on
@@ -66,7 +78,7 @@ let g:rustfmt_autosave = 1
 
 "Key mappings
 map <C-w><C-b> :buffers<cr>
-map <C-Ã¶> :terminal<cr>
+map <C-ö> :terminal<cr>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
  
@@ -84,5 +96,5 @@ function! Check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1] =~ '\s'
 endfunction
-let g:startify_bookmarks = [ {'c': '~/.vimrc'}, {'x': 'H:\docs\notes.txt'}]
+let g:startify_bookmarks = [ {'c': '~/.vimrc'}, {'x': '/h/docs/notes.txt'}]
 " --@main-end/
