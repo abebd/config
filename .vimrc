@@ -8,7 +8,7 @@
 "	2024-10-03	initial commit
 " --@changelog-end/
 " --@main/
-"Plugins
+" --@plugins/
 call plug#begin()
     Plug 'tpope/vim-sensible'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -23,6 +23,7 @@ call plug#begin()
     Plug 'joshdick/onedark.vim'
 	Plug 'davidosomething/vim-colors-meh'
 	Plug 'kvrohit/rasmus.nvim'
+    Plug 'ayu-theme/ayu-vim'
 call plug#end()
  
 set number
@@ -46,23 +47,24 @@ set ignorecase
 
 let g:coc_disable_startup_warning = 1
 
-"GUI
+" --@gui/
 
 set guifont=Consolas:h14
 set guioptions-=m
 set guioptions-=T
 set guioptions=Ace
  
-" Colorschemes
+" --@colorschemes/
 
-"colorscheme onedark
 
 "colorscheme gruvbox
 "set bg=dark
 "let g:gruvbox_contrast_dark = 'hard'
 "let g:gruvbox_material_foreground = 'material'
  
-colorscheme meh
+"colorscheme meh
+"colorscheme onedark
+colorscheme ayu
 
 "For rust syntax highlighting
 syntax enable
@@ -76,7 +78,7 @@ let g:rustfmt_autosave = 1
 "let &shellpipe  = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
 "set shellquote= shellxquote=
 
-"Key mappings
+" --@key mappings/
 map <C-w><C-b> :buffers<cr>
 map <C-ö> :terminal<cr>
 let g:ctrlp_map = '<c-p>'
