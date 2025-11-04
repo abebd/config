@@ -26,29 +26,30 @@ set viminfofile=$LOCALAPPDATA/vim/viminfo
 call plug#begin()
     Plug 'tpope/vim-sensible'
     "Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'jiangmiao/auto-pairs'
+    "Plug 'jiangmiao/auto-pairs'
     Plug 'tpope/vim-fugitive'
     Plug 'mileszs/ack.vim'
-    Plug 'kien/ctrlp.vim'
+    Plug 'inkarkat/vim-ingo-library'
+    "Plug 'kien/ctrlp.vim'
     "Plug 'scrooloose/nerdtree'
     "Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
     
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'preservim/tagbar'
+    "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    "Plug 'vim-airline/vim-airline'
+    "Plug 'vim-airline/vim-airline-themes'
+    "Plug 'preservim/tagbar'
 
 	"themes
-	Plug 'LuRsT/austere.vim'
+	"Plug 'LuRsT/austere.vim'
     Plug 'morhetz/gruvbox'
     Plug 'sainnhe/gruvbox-material'
-    Plug 'joshdick/onedark.vim'
-	Plug 'davidosomething/vim-colors-meh'
-	Plug 'kvrohit/rasmus.nvim'
-    Plug 'ayu-theme/ayu-vim'
-    Plug 'EdenEast/nightfox.nvim'
+    "Plug 'joshdick/onedark.vim'
+	"Plug 'davidosomething/vim-colors-meh'
+	"Plug 'kvrohit/rasmus.nvim'
+    "Plug 'ayu-theme/ayu-vim'
+    "Plug 'EdenEast/nightfox.nvim'
     Plug 'tomasr/molokai'
     "Plug 'vim-colors-solarized/colors'
 call plug#end()
@@ -66,6 +67,7 @@ set scrolloff=5
 set expandtab
 set ignorecase
 set ffs=unix,dos
+set syntax=off 
 "colorcolumn stuff
 "doesnt work
 "set colorcolumn=80
@@ -88,6 +90,8 @@ set autoindent
 
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#left_alt_sep = '|'
+
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
  
 " --@colorschemes/
 
@@ -101,10 +105,10 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 "colorscheme onedark
 "colorscheme ayu
 "colorscheme zaibatsu
-colorscheme molokai 
+"colorscheme molokai 
+colorscheme default "boring :(
 
 "For rust syntax highlighting
-syntax enable
 filetype plugin indent on
 let g:rustfmt_autosave = 1
  
@@ -126,10 +130,10 @@ let g:ctrlp_cmd = 'CtrlP'
 "nnoremap <C-b> :ls<cr>:b<space>
 nnoremap <Leader>b :ls<cr>:b<space>
 "nnoremap <Leader>b :CtrlPBuffer<enter> " lagging cus windows :(
-nnoremap <C-Up> :ls<cr>:b<space>
-nnoremap <C-Down> :b#<enter>
-nnoremap <C-Right> :bnext<enter>
-nnoremap <C-Left> :bprevious<enter>
+"nnoremap <C-Up> :ls<cr>:b<space>
+"nnoremap <C-Down> :b#<enter>
+"nnoremap <C-Right> :bnext<enter>
+"nnoremap <C-Left> :bprevious<enter>
 "nnoremap <leader>n :NERDTreeFocus<CR>
 "nnoremap <C-b> :NERDTree<CR>
 "nnoremap <C-b> :NERDTreeToggle<CR>
@@ -181,7 +185,8 @@ nnoremap <leader>rf :call RgFzfOpen()<CR>
 " custom fzf thing
 "nnoremap <Space><Space> :call OpenFilesFromFzfInPwd()<CR>
 
-nnoremap <Space><Space> :Files <CR>
+"nnoremap <Space><Space> :Files <CR>
+nnoremap <Space><Space> :FZF <CR>
 
 function! ToggleQuickfix()
   if empty(filter(getwininfo(), 'v:val.quickfix'))
@@ -275,4 +280,83 @@ nnoremap <Leader>* :execute 'Ack! ' . expand('<cword>')<CR>
 nnorema <Leader>w :cprevious<CR>
 nnoremap <Leader>s :cnext<CR>
 
+" +  Add the current file to the buffer list, and go to the next file entry.
+"function! NetrwBufAdd(isLocal)
+    "let l:filespec = netrw#Call('NetrwFile', netrw#Call('NetrwGetWord'))
+    "if filereadable(l:filespec)
+        "execute 'badd' ingo#compat#fnameescape(l:filespec)
+    "endif
+    "execute 'normal!' (b:netrw_liststyle == netrw#Expose('WIDELIST') ? 'W' : 'j')
+    "return ''
+"endfunction
+"
+"" -  Remove file buffer if it exists
+"function! NetrwBufRemove(isLocal)
+    "let l:filespec = netrw#Call('NetrwFile', netrw#Call('NetrwGetWord'))
+    "let l:buf = bufnr(fnameescape(l:filespec))
+    "if l:buf > 0
+        "execute 'bdelete' l:buf
+    "endif
+    "execute 'normal!' (b:netrw_liststyle == netrw#Expose('WIDELIST') ? 'W' : 'k')
+    "return ''
+"endfunction
+"
+"let g:Netrw_UserMaps = [
+"\   ['<Tab>', 'NetrwBufAdd'],
+"\   ['<S-Tab>', 'NetrwBufRemove'],
+"\]
+
+" Add current file to buffer list and move to next entry
+function! NetrwBufAdd(isLocal)
+  try
+    let l:filespec = netrw#Call('NetrwFile', netrw#Call('NetrwGetWord'))
+    if filereadable(l:filespec)
+      execute 'badd' ingo#compat#fnameescape(l:filespec)
+    else
+      echohl WarningMsg | echom "Not a readable file: " . l:filespec | echohl None
+    endif
+  catch /.*/
+    echohl ErrorMsg | echom "Error adding file: " . v:exception | echohl None
+  endtry
+
+  " Move cursor to next entry
+  try
+    execute 'normal!' (b:netrw_liststyle == netrw#Expose('WIDELIST') ? 'W' : 'j')
+  catch /.*/
+    " Ignore movement errors silently
+  endtry
+  return ''
+endfunction
+
+" Remove current file buffer (if it exists) and move to next entry
+function! NetrwBufRemove(isLocal)
+  try
+    let l:filespec = netrw#Call('NetrwFile', netrw#Call('NetrwGetWord'))
+    let l:buf = bufnr(fnameescape(l:filespec))
+    if l:buf > 0
+      execute 'bdelete' l:buf
+    else
+      echohl WarningMsg | echom "Buffer not found for: " . l:filespec | echohl None
+    endif
+  catch /.*/
+    echohl ErrorMsg | echom "Error removing buffer: " . v:exception | echohl None
+  endtry
+
+  " Move cursor to next entry
+  try
+    execute 'normal!' (b:netrw_liststyle == netrw#Expose('WIDELIST') ? 'W' : 'k')
+  catch /.*/
+    " Ignore movement errors silently
+  endtry
+  return ''
+endfunction
+
+" Use Tab and Shift-Tab to add/remove buffers
+let g:Netrw_UserMaps = [
+\   ['<Tab>', 'NetrwBufAdd'],
+\   ['<S-Tab>', 'NetrwBufRemove'],
+\]
+
 " --@main-end/
+
+set syntax=off
