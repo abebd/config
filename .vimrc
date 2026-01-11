@@ -52,6 +52,8 @@ call plug#begin()
     "Plug 'EdenEast/nightfox.nvim'
     Plug 'tomasr/molokai'
     "Plug 'vim-colors-solarized/colors'
+    Plug 'ayu-theme/ayu-vim' 
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
  
 set number
@@ -67,7 +69,6 @@ set scrolloff=5
 set expandtab
 set ignorecase
 set ffs=unix,dos
-set syntax=off 
 "colorcolumn stuff
 "doesnt work
 "set colorcolumn=80
@@ -96,17 +97,17 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 " --@colorschemes/
 
 
-"colorscheme gruvbox
-"set bg=dark
-"let g:gruvbox_contrast_dark = 'hard'
-"let g:gruvbox_material_foreground = 'material'
+colorscheme gruvbox
+set bg=dark
+let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_material_foreground = 'material'
  
 "colorscheme meh
 "colorscheme onedark
 "colorscheme ayu
 "colorscheme zaibatsu
 "colorscheme molokai 
-colorscheme default "boring :(
+"colorscheme ayu
 
 "For rust syntax highlighting
 filetype plugin indent on
@@ -129,6 +130,7 @@ let g:ctrlp_cmd = 'CtrlP'
 
 "nnoremap <C-b> :ls<cr>:b<space>
 nnoremap <Leader>b :ls<cr>:b<space>
+nnoremap <Leader>t :tag<space>
 "nnoremap <Leader>b :CtrlPBuffer<enter> " lagging cus windows :(
 "nnoremap <C-Up> :ls<cr>:b<space>
 "nnoremap <C-Down> :b#<enter>
@@ -359,4 +361,3 @@ let g:Netrw_UserMaps = [
 
 " --@main-end/
 
-set syntax=off
