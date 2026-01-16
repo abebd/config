@@ -194,8 +194,11 @@ bar {
 }
 
 exec_always --no-startup-id xrandr --output DP-1 --primary --auto --right-of HDMI-1
-exec_always feh --bg-fill $HOME/Firefox_wallpaper.png
+exec_always feh --bg-fill $HOME/Pictures/Wallpapers/Firefox_wallpaper.png
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id picom -b --backend xrender
+#exec_always xrandr --output DP-1 --mode 2560x1440 --rate 165.00
+exec_always --no-startup-id "sleep 1 && xrandr --output DP-1 --mode 2560x1440 --rate 165.00"
 
 # Gruvbox Color Variables
 set $bg      #282828
@@ -222,6 +225,7 @@ client.background       $bg
 
 for_window [class=".*"] border pixel 2
 
+#TODO not sure if used
 # Set mouse sensitivity (800 DPI, 6/11 equivalent)
 exec_always --no-startup-id xinput set-prop "pointer:Logitech G603" "libinput Accel Profile Enabled" 0 1
 exec_always --no-startup-id xinput set-prop "pointer:Logitech G603" "libinput Accel Speed" 0

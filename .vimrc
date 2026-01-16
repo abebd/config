@@ -25,6 +25,7 @@ set viminfofile=$LOCALAPPDATA/vim/viminfo
 
 call plug#begin()
     Plug 'tpope/vim-sensible'
+    Plug 'tpope/vim-vinegar'
     "Plug 'neoclide/coc.nvim', {'branch': 'release'}
     "Plug 'jiangmiao/auto-pairs'
     Plug 'tpope/vim-fugitive'
@@ -108,6 +109,14 @@ let g:gruvbox_material_foreground = 'material'
 "colorscheme zaibatsu
 "colorscheme molokai 
 "colorscheme ayu
+
+" Force transparent background 
+hi Normal ctermbg=NONE guibg=NONE
+hi NonText ctermbg=NONE guibg=NONE
+hi EndOfBuffer ctermbg=NONE guibg=NONE
+hi LineNr ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
+
 
 "For rust syntax highlighting
 filetype plugin indent on
