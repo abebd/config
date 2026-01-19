@@ -137,3 +137,4 @@ THEME=$(< ~/.theme)
 
 
 export PATH=$PATH:/home/albin/.spicetify
+export PATH=$PATH:~/.spicetify
