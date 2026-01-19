@@ -135,3 +135,5 @@ PROMPT_COMMAND='PS1_CMD1=$(__git_ps1 " (%s)")'; PS1='\w${PS1_CMD1} \\$ '
 THEME=$(< ~/.theme)
 
 
+
+export PATH=$PATH:/home/albin/.spicetify
