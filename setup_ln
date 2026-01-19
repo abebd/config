@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+ln -s ~/git/config/.bashrc ~/.bashrc
+ln -s ~/git/config/.tmux ~/.tmux
+ln -s ~/git/config/.tmux ~/.tmux

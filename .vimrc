@@ -1,23 +1,3 @@
-" --@changelog/
-" 	when		what
-"   2025-03-18  add expandtab
-"	2025-02-21	new schemes
-"	2024-11-19	new scheme and other shit
-"	2024-10-09	tab auto complete
-"	2024-10-06	added ctrlp.vim
-"	2024-10-03	initial commit
-" --@changelog-end/
-" --@main/
-" --@plugins/
-
-" treat file as dos instea dof unix
-" :e ++ff=dos
-
-" --- Redirect all Vim cache files off the network drive ---
-"set directory^=C:/Users/alvi03/AppData/Local/vim/swap//
-"set backupdir^=C:/Users/alvi03/AppData/Local/vim/backup//
-"set undodir^=C:/Users/alvi03/AppData/Local/vim/undo//
-"set viminfofile=C:/Users/alvi03/AppData/Local/vim/viminfo
 set directory^=$LOCALAPPDATA/vim/swap//
 set backupdir^=$LOCALAPPDATA/vim/backup//
 set undodir^=$LOCALAPPDATA/vim/undo//
@@ -26,36 +6,47 @@ set viminfofile=$LOCALAPPDATA/vim/viminfo
 call plug#begin()
     Plug 'tpope/vim-sensible'
     Plug 'tpope/vim-vinegar'
-    "Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    "Plug 'jiangmiao/auto-pairs'
     Plug 'tpope/vim-fugitive'
     Plug 'mileszs/ack.vim'
     Plug 'inkarkat/vim-ingo-library'
-    "Plug 'kien/ctrlp.vim'
-    "Plug 'scrooloose/nerdtree'
-    "Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
     
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    "Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    "Plug 'vim-airline/vim-airline'
-    "Plug 'vim-airline/vim-airline-themes'
-    "Plug 'preservim/tagbar'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 	"themes
-	"Plug 'LuRsT/austere.vim'
+	Plug 'LuRsT/austere.vim'
     Plug 'morhetz/gruvbox'
     Plug 'sainnhe/gruvbox-material'
-    "Plug 'joshdick/onedark.vim'
-	"Plug 'davidosomething/vim-colors-meh'
-	"Plug 'kvrohit/rasmus.nvim'
-    "Plug 'ayu-theme/ayu-vim'
-    "Plug 'EdenEast/nightfox.nvim'
+    Plug 'joshdick/onedark.vim'
+	Plug 'kvrohit/rasmus.nvim'
+    Plug 'ayu-theme/ayu-vim'
+    Plug 'EdenEast/nightfox.nvim'
     Plug 'tomasr/molokai'
-    "Plug 'vim-colors-solarized/colors'
+    Plug 'vim-colors-solarized/colors'
     Plug 'ayu-theme/ayu-vim' 
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'nordtheme/vim'
+    Plug 'olimorris/onedarkpro.nvim'
 call plug#end()
+
+" choose theme
+let s:theme_file = expand('~/.config/global_theme')
+
+if filereadable(s:theme_file)
+    let g:active_theme = trim(readfile(s:theme_file)[0])
+else
+    let g:active_theme = "gruvbox" " Fallback
+endif
+
+" Apply logic based on the string
+if g:active_theme == "onedark"
+    colorscheme onedark
+elseif g:active_theme == "gruvbox"
+    colorscheme gruvbox
+    set bg=dark
+    let g:gruvbox_contrast_dark = 'dark'
+    let g:gruvbox_material_foreground = 'material'
+endif
  
 set number
 set splitright
@@ -70,17 +61,8 @@ set scrolloff=5
 set expandtab
 set ignorecase
 set ffs=unix,dos
-"colorcolumn stuff
-"doesnt work
-"set colorcolumn=80
-"autocmd WinLeave * set colorcolumn=0
-"autocmd WinEnter * set colorcolumn=80
-"hi ColorColumn ctermbg=grey
-
-"let g:coc_disable_startup_warning = 1
 
 " --@gui/
-
 set guifont=Consolas:h14
 set guioptions-=m
 set guioptions-=T
@@ -98,10 +80,6 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 " --@colorschemes/
 
 
-colorscheme gruvbox
-set bg=dark
-let g:gruvbox_contrast_dark = 'medium'
-let g:gruvbox_material_foreground = 'material'
  
 "colorscheme meh
 "colorscheme onedark
@@ -139,7 +117,8 @@ let g:ctrlp_cmd = 'CtrlP'
 
 "nnoremap <C-b> :ls<cr>:b<space>
 nnoremap <Leader>b :ls<cr>:b<space>
-nnoremap <Leader>t :tag<space>
+nnoremap <Leader>t :Tags<enter>
+nnoremap <Leader>y :BTags<enter>
 "nnoremap <Leader>b :CtrlPBuffer<enter> " lagging cus windows :(
 "nnoremap <C-Up> :ls<cr>:b<space>
 "nnoremap <C-Down> :b#<enter>

@@ -1,0 +1,16 @@
+[general]
+import = [
+    "~/.config/alacritty/current_theme.toml"
+]
+
+[window]
+decorations = "full"
+decorations_theme_variant = "Dark"
+startup_mode = "Maximized"
+opacity = 0.85
+
+# Font configuration - all font settings in ONE section
+[font]
+size = 18.0
+normal.family = "0xProto Nerd Font Mono"
+

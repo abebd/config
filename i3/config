@@ -184,6 +184,8 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+bindsym $mod+b exec polybar-msg cmd toggle
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
@@ -194,7 +196,8 @@ bar {
 }
 
 exec_always --no-startup-id xrandr --output DP-1 --primary --auto --right-of HDMI-1
-exec_always feh --bg-fill $HOME/Pictures/Wallpapers/Firefox_wallpaper.png
+exec_always feh --bg-fill $HOME/Pictures/Wallpapers/ALLqk82.png
+
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id picom -b --backend xrender
 #exec_always xrandr --output DP-1 --mode 2560x1440 --rate 165.00
@@ -229,3 +232,5 @@ for_window [class=".*"] border pixel 2
 # Set mouse sensitivity (800 DPI, 6/11 equivalent)
 exec_always --no-startup-id xinput set-prop "pointer:Logitech G603" "libinput Accel Profile Enabled" 0 1
 exec_always --no-startup-id xinput set-prop "pointer:Logitech G603" "libinput Accel Speed" 0
+
+gaps inner 10
