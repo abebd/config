@@ -13,6 +13,7 @@ call plug#begin()
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'dense-analysis/ale'
 
 	"themes
 	Plug 'LuRsT/austere.vim'
@@ -23,7 +24,6 @@ call plug#begin()
     Plug 'ayu-theme/ayu-vim'
     Plug 'EdenEast/nightfox.nvim'
     Plug 'tomasr/molokai'
-    Plug 'vim-colors-solarized/colors'
     Plug 'ayu-theme/ayu-vim' 
     Plug 'nordtheme/vim'
     Plug 'olimorris/onedarkpro.nvim'
@@ -75,20 +75,17 @@ set autoindent
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
+let g:ale_set_quickfix = 0
+let g:ale_set_loclist = 1
+
+let g:ale_linters = {
+\   'python': ['ruff'],
+\}
+let g:ale_fixers = {
+\   'python': ['ruff'],
+\}
+
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
- 
-" --@colorschemes/
-
-
- 
-"colorscheme meh
-"colorscheme onedark
-"colorscheme ayu
-"colorscheme zaibatsu
-"colorscheme molokai 
-"colorscheme ayu
-
-" Force transparent background 
 hi Normal ctermbg=NONE guibg=NONE
 hi NonText ctermbg=NONE guibg=NONE
 hi EndOfBuffer ctermbg=NONE guibg=NONE
@@ -96,18 +93,10 @@ hi LineNr ctermbg=NONE guibg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
 
 
-"For rust syntax highlighting
 filetype plugin indent on
 let g:rustfmt_autosave = 1
  
-" DISABLED: Plug doesnt work with powershell
-"let &shell = executable('powershell') ? 'pwsh' : 'powershell'
-"let &shellcmdflag = '-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';Remove-Alias -Force -ErrorAction SilentlyContinue tee;'
-"let &shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
-"let &shellpipe  = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
-"set shellquote= shellxquote=
 
-" --@key mappings/
 let g:mapleader=','
 
 map <C-w><C-b> :buffers<cr>
@@ -115,19 +104,9 @@ map <C-ö> :terminal<cr>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
-"nnoremap <C-b> :ls<cr>:b<space>
 nnoremap <Leader>b :ls<cr>:b<space>
 nnoremap <Leader>t :Tags<enter>
 nnoremap <Leader>y :BTags<enter>
-"nnoremap <Leader>b :CtrlPBuffer<enter> " lagging cus windows :(
-"nnoremap <C-Up> :ls<cr>:b<space>
-"nnoremap <C-Down> :b#<enter>
-"nnoremap <C-Right> :bnext<enter>
-"nnoremap <C-Left> :bprevious<enter>
-"nnoremap <leader>n :NERDTreeFocus<CR>
-"nnoremap <C-b> :NERDTree<CR>
-"nnoremap <C-b> :NERDTreeToggle<CR>
-"nnoremap <C-f> :NERDTreeFind<CR>
 let g:NERDTreeWinPos = "right"
 
 " <S-Tab>: completion back
@@ -241,6 +220,7 @@ function! GitConflictsQuickfix()
 endfunction
 
 command! GitConflicts call GitConflictsQuickfix()
+command! PyBuild cexpr system('uv run basedpyright') | copen
 
 " ack.vim --- {{{
 

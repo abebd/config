@@ -1,4 +1,4 @@
-set $bg      #282828
+t $bg      #282828
 set $fg      #ebdbb2
 set $primary #d79921
 set $alert   #cc241d
