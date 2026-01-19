@@ -1,0 +1,1 @@
+/home/albin/git/config/.tmux

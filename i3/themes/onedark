@@ -1,0 +1,21 @@
+# Core Colors
+set $bg           #282c34
+set $fg           #abb2bf
+set $red          #e06c75
+set $green        #98c379
+set $yellow       #d19a66
+set $blue         #61afef
+set $purple       #c678dd
+set $cyan         #56b6c2
+set $comment_grey #5c6370
+
+# Window Decorations
+# class                 border  backgr. text    indicator child_border
+client.focused          $blue   $blue   $bg     $purple   $blue
+client.focused_inactive $bg     $bg     $fg     $bg       $bg
+client.unfocused        $bg     $bg     $comment_grey $bg   $bg
+client.urgent           $red    $red    $bg     $red      $red
+client.placeholder      $bg     $bg     $fg     $bg       $bg
+
+client.background       $bg
+

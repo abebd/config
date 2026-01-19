@@ -1,4 +1,7 @@
 [general]
+
+live_config_reload = true
+
 import = [
     "~/.config/alacritty/current_theme.toml"
 ]

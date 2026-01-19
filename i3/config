@@ -9,6 +9,8 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+include ~/.config/i3/current_theme
+
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -204,15 +206,15 @@ exec_always --no-startup-id picom -b --backend xrender
 exec_always --no-startup-id "sleep 1 && xrandr --output DP-1 --mode 2560x1440 --rate 165.00"
 
 # Gruvbox Color Variables
-set $bg      #282828
-set $red     #cc241d
-set $green   #98971a
-set $yellow  #d79921
-set $blue    #458588
-set $purple  #b16286
-set $aqua    #689d6a
-set $gray    #a89984
-set $darkgray #1d2021
+#set $bg      #282828
+#set $red     #cc241d
+#set $green   #98971a
+#set $yellow  #d79921
+#set $blue    #458588
+#set $purple  #b16286
+#set $aqua    #689d6a
+#set $gray    #a89984
+#set $darkgray #1d2021
 
 # Remove title bars and set border thickness (2px looks sharp)
 default_border pixel 2
@@ -232,5 +234,10 @@ for_window [class=".*"] border pixel 2
 # Set mouse sensitivity (800 DPI, 6/11 equivalent)
 exec_always --no-startup-id xinput set-prop "pointer:Logitech G603" "libinput Accel Profile Enabled" 0 1
 exec_always --no-startup-id xinput set-prop "pointer:Logitech G603" "libinput Accel Speed" 0
+
+# Disable screen blanking and power management
+exec --no-startup-id xset s off
+exec --no-startup-id xset -dpms
+exec --no-startup-id xset s noblank
 
 gaps inner 10

@@ -1,0 +1,12 @@
+set $bg      #282828
+set $fg      #ebdbb2
+set $primary #d79921
+set $alert   #cc241d
+
+# Use the variables for window borders
+# class                 border    backgr.   text    indicator child_border
+client.focused          $primary  $primary  $bg     $primary  $primary
+client.focused_inactive $bg       $bg       $fg     $bg       $bg
+client.unfocused        $bg       $bg       $fg     $bg       $bg
+
+
