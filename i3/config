@@ -43,6 +43,10 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -190,19 +194,18 @@ bindsym $mod+b exec polybar-msg cmd toggle
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status
-        status_command ~/.config/polybar/launch.sh --my-first-polybar
-        mode hide
-        modifier none
-}
+#bar {
+        #status_command i3status
+        #status_command ~/.config/polybar/launch.sh --my-first-polybar
+        #mode hide
+        #modifier none
+#}
 
 exec_always --no-startup-id xrandr --output DP-1 --primary --auto --right-of HDMI-1
-exec_always feh --bg-fill $HOME/Pictures/Wallpapers/onedark_clouds.png
+exec_always feh --bg-fill $HOME/Pictures/Wallpapers/gruvbox_autumn_forest.png
 
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh --my-first-polybar
 exec_always --no-startup-id picom -b --backend xrender
-#exec_always xrandr --output DP-1 --mode 2560x1440 --rate 165.00
 exec_always --no-startup-id "sleep 1 && xrandr --output DP-1 --mode 2560x1440 --rate 165.00"
 
 # Gruvbox Color Variables
@@ -233,3 +236,19 @@ exec --no-startup-id xset -dpms
 exec --no-startup-id xset s noblank
 
 gaps inner 10
+
+# Define your monitors (optional but cleaner)
+set $mon1 HDMI-1
+set $mon2 DP-1 
+
+workspace 1 output $mon2
+workspace 2 output $mon2
+workspace 3 output $mon2
+workspace 4 output $mon2
+workspace 5 output $mon2
+
+workspace 6 output $mon1
+workspace 7 output $mon1
+workspace 8 output $mon1
+workspace 9 output $mon1
+workspace 0 output $mon1

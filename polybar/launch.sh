@@ -11,9 +11,16 @@ launch_bar() {
 	while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 	# Launch the bar
-    if [[ "$style" == "my-first-polybar" ]]; then
-        polybar -q main -c "$dir/$style/config.ini" &	
-    fi
+	if type "xrandr"; then
+	  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+		MONITOR=$m polybar -q main -c "$dir/$style/config.ini" &	
+	  done
+	else
+	  polybar --reload main &
+	fi
+    #if [[ "$style" == "my-first-polybar" ]]; then
+    #    polybar -q main -c "$dir/$style/config.ini" &	
+    #fi
 }
 
 if [[ "$1" == "--my-first-polybar" ]]; then
