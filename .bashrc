@@ -117,24 +117,30 @@ fi
 
 
 
-alias vim=vi
 alias runelite=/opt/RuneLite.AppImage
 alias bolt="flatpak run com.adamcake.Bolt"
 alias wtwitch="~/git/wtwitch/src/wtwitch"
+alias anime="anipy-cli -M"
+
 
 export PATH="$HOME/.local/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+#eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 export DISPLAY=:0
 
-PROMPT_COMMAND='PS1_CMD1=$(__git_ps1 " (%s)")'; PS1='\w${PS1_CMD1} \\$ '
+
+if [ -f /usr/share/git/git-prompt.sh ]; then
+    . /usr/share/git/git-prompt.sh
+    PROMPT_COMMAND='PS1_CMD1=$(__git_ps1 " (%s)")'; PS1='\w${PS1_CMD1} \\$ '
+else
+    export PS!='\w \$'
+fi
 
 THEME=$(< ~/.theme)
 
-
-
 export PATH=$PATH:/home/albin/.spicetify
 export PATH=$PATH:~/.spicetify
+

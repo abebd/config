@@ -61,6 +61,7 @@ set scrolloff=5
 set expandtab
 set ignorecase
 set ffs=unix,dos
+set clipboard=unnamedplus
 
 " --@gui/
 set guifont=Consolas:h14
@@ -326,6 +327,10 @@ let g:Netrw_UserMaps = [
 \   ['<Tab>', 'NetrwBufAdd'],
 \   ['<S-Tab>', 'NetrwBufRemove'],
 \]
+
+" compilers
+autocmd FileType python setlocal makeprg=uv\ run\ ruff\ check\ --quiet\ --output-format=concise
+"autocmd FileType python setlocal errorformat=%f:%l%c:\ %m
 
 " --@main-end/
 

@@ -64,16 +64,14 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 # ibindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
-bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+#bindcode $mod+40 exec "rofi -combi-modi window,drun,ssh -show combi"
+#bindcode $mod+40 exec "rofi -combi-modi window,drun -show combi"
+#bindcode $mod+40 exec "rofi -combi-modi window,drun -show combi"
+bindcode $mod+40 exec "~/.config/rofi/launchers/type-2/launcher.sh"
+bindsym $mod+g exec "firefox"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
-
-# change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+odiaeresis focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -201,7 +199,7 @@ bindsym $mod+b exec polybar-msg cmd toggle
         #modifier none
 #}
 
-exec_always --no-startup-id xrandr --output DP-1 --primary --auto --right-of HDMI-1
+exec_always --no-startup-id xrandr --output HDMI-0 --mode 1920x1080 --pos 0x0 --output DP-0 --primary --mode 2560x1440 --rate 165 --right-of HDMI-0
 exec_always feh --bg-fill $HOME/Pictures/Wallpapers/gruvbox_autumn_forest.png
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh --my-first-polybar
@@ -227,8 +225,9 @@ for_window [class=".*"] border pixel 2
 
 #TODO not sure if used
 # Set mouse sensitivity (800 DPI, 6/11 equivalent)
-exec_always --no-startup-id xinput set-prop "pointer:Logitech G603" "libinput Accel Profile Enabled" 0 1
-exec_always --no-startup-id xinput set-prop "pointer:Logitech G603" "libinput Accel Speed" 0
+#exec_always --no-startup-id xinput set-prop "pointer:Logitech G603" "libinput Accel Profile Enabled" 0 1
+#exec_always --no-startup-id xinput set-prop "pointer:Logitech G603" "libinput Accel Speed" 0
+exec_always --no-startup-id xinput set-prop "10" "libinput Accel Profile Enabled" 0 1 0
 
 # Disable screen blanking and power management
 exec --no-startup-id xset s off
@@ -238,8 +237,8 @@ exec --no-startup-id xset s noblank
 gaps inner 10
 
 # Define your monitors (optional but cleaner)
-set $mon1 HDMI-1
-set $mon2 DP-1 
+set $mon1 HDMI-0
+set $mon2 DP-0 
 
 workspace 1 output $mon2
 workspace 2 output $mon2
