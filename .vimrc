@@ -55,7 +55,7 @@ set relativenumber
 set tabstop=4
 set shiftwidth=4
 set belloff=all
-set paste "allow copy paste
+"set paste "allow copy paste
 set autoindent
 set scrolloff=5
 set expandtab
@@ -248,8 +248,10 @@ nnoremap <Leader>* :execute 'Ack! ' . expand('<cword>')<CR>
 " }}}
 
 " Navigate quickfix list with ease
-nnorema <Leader>w :cprevious<CR>
+nnoremap <Leader>w :cprevious<CR>
 nnoremap <Leader>s :cnext<CR>
+
+nnoremap cf :make<CR><Enter><Leader>c
 
 " +  Add the current file to the buffer list, and go to the next file entry.
 "function! NetrwBufAdd(isLocal)
@@ -331,6 +333,14 @@ let g:Netrw_UserMaps = [
 " compilers
 autocmd FileType python setlocal makeprg=uv\ run\ ruff\ check\ --quiet\ --output-format=concise
 "autocmd FileType python setlocal errorformat=%f:%l%c:\ %m
+
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
 
 " --@main-end/
 

@@ -121,6 +121,7 @@ alias runelite=/opt/RuneLite.AppImage
 alias bolt="flatpak run com.adamcake.Bolt"
 alias wtwitch="~/git/wtwitch/src/wtwitch"
 alias anime="anipy-cli -M"
+alias dict='dict -d wn -d gcide'
 
 
 export PATH="$HOME/.local/bin:$PATH"

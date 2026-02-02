@@ -9,26 +9,26 @@ delete_if_ln() {
     fi
 
 }
-delete_if_ln ~/.bash
-ln -s ~/git/config/.bashrc ~/.bashrc
+delete_if_ln ~/.bashrc
+ln -s ~/git/dotfiles/.bashrc ~/.bashrc
 
 delete_if_ln ~/.tmux
-ln -s ~/git/config/.tmux ~/.tmux
+ln -s ~/git/dotfiles/.tmux ~/.tmux
 
 delete_if_ln ~/.tmux.conf
-ln -s ~/git/config/.tmux.conf ~/.tmux.conf
+ln -s ~/git/dotfiles/.tmux.conf ~/.tmux.conf
 
 delete_if_ln ~/.vimrc
-ln -s ~/git/config/.vimrc ~/.vimrc
+ln -s ~/git/dotfiles/.vimrc ~/.vimrc
 
 delete_if_ln ~/.config/polybar
-ln -s ~/git/config/polybar ~/.config/polybar
+ln -s ~/git/dotfiles/polybar ~/.config/polybar
 
 delete_if_ln ~/.config/alacritty
-ln -s ~/git/config/alacritty ~/.config/alacritty
+ln -s ~/git/dotfiles/alacritty ~/.config/alacritty
 
 delete_if_ln ~/.config/.alacritty.toml
-ln -s ~/git/config/.alacritty.toml ~/.config/.alacritty.toml
+ln -s ~/git/dotfiles/.alacritty.toml ~/.config/.alacritty.toml
 
 delete_if_ln ~/.config/i3
-ln -s ~/git/config/i3 ~/.config/i3
+ln -s ~/git/dotfiles/i3 ~/.config/i3

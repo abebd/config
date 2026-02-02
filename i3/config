@@ -200,7 +200,7 @@ bindsym $mod+b exec polybar-msg cmd toggle
 #}
 
 exec_always --no-startup-id xrandr --output HDMI-0 --mode 1920x1080 --pos 0x0 --output DP-0 --primary --mode 2560x1440 --rate 165 --right-of HDMI-0
-exec_always feh --bg-fill $HOME/Pictures/Wallpapers/gruvbox_autumn_forest.png
+exec_always --no-startup-id wallpaper -a
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh --my-first-polybar
 exec_always --no-startup-id picom -b --backend xrender
