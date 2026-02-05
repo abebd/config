@@ -3,6 +3,8 @@ set backupdir^=$LOCALAPPDATA/vim/backup//
 set undodir^=$LOCALAPPDATA/vim/undo//
 set viminfofile=$LOCALAPPDATA/vim/viminfo
 
+filetype plugin indent on
+
 call plug#begin()
     Plug 'tpope/vim-sensible'
     Plug 'tpope/vim-vinegar'
@@ -12,41 +14,14 @@ call plug#begin()
     
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    "Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'dense-analysis/ale'
 
 	"themes
-	Plug 'LuRsT/austere.vim'
-    Plug 'morhetz/gruvbox'
     Plug 'sainnhe/gruvbox-material'
     Plug 'joshdick/onedark.vim'
-	Plug 'kvrohit/rasmus.nvim'
-    Plug 'ayu-theme/ayu-vim'
-    Plug 'EdenEast/nightfox.nvim'
     Plug 'tomasr/molokai'
-    Plug 'ayu-theme/ayu-vim' 
-    Plug 'nordtheme/vim'
-    Plug 'olimorris/onedarkpro.nvim'
 call plug#end()
-
-" choose theme
-let s:theme_file = expand('~/.config/global_theme')
-
-if filereadable(s:theme_file)
-    let g:active_theme = trim(readfile(s:theme_file)[0])
-else
-    let g:active_theme = "gruvbox" " Fallback
-endif
-
-" Apply logic based on the string
-if g:active_theme == "onedark"
-    colorscheme onedark
-elseif g:active_theme == "gruvbox"
-    colorscheme gruvbox
-    set bg=dark
-    let g:gruvbox_contrast_dark = 'dark'
-    let g:gruvbox_material_foreground = 'material'
-endif
  
 set number
 set splitright
@@ -94,7 +69,6 @@ hi LineNr ctermbg=NONE guibg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
 
 
-filetype plugin indent on
 let g:rustfmt_autosave = 1
  
 
@@ -115,47 +89,6 @@ inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
 " <CR>: confirm completion, or insert <CR>
 inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
  
-function! Check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1] =~ '\s'
-endfunction
-let g:startify_bookmarks = [ {'c': '~/.vimrc'}, {'x': '/h/docs/notes.txt'}]
-
-"nnoremap <Space><Space> :!vim -o $(fzf)<CR>
-
-function! OpenFilesFromFzfInPwd()
-  let tempfile = tempname()
-  "call system('find . -type f | fzf --multi > ' . shellescape(tempfile))
-  call system('find . -type f -not -path "*/.git/*" -not -path "*/__pycache__/*" -not -path "*.swp" -not -path "*/.vs/*" | fzf --multi > ' . shellescape(tempfile))
-  let files = readfile(tempfile)
-  if empty(files)
-    return
-  endif
-  call delete(tempfile)
-
-  let files = map(files, 'substitute(v:val, "^\\./", "", "")')
-  execute 'edit' fnameescape(files[0])
-  for file in files[1:]
-    execute 'badd' fnameescape(file)
-  endfor
-endfunction
-
-function! RgFzfOpen()
-    let dir = expand('%:p:h')
-    let result = systemlist('rg --line-number "" ' . dir . ' | fzf')[0]
-    if result != ''
-        let parts = split(result, ':')
-        execute 'edit ' . parts[0]
-        execute parts[1]
-    endif
-endfunction
-
-nnoremap <leader>rf :call RgFzfOpen()<CR>
-
-" custom fzf thing
-"nnoremap <Space><Space> :call OpenFilesFromFzfInPwd()<CR>
-
-"nnoremap <Space><Space> :Files <CR>
 nnoremap <Space><Space> :FZF <CR>
 
 function! ToggleQuickfix()
@@ -167,32 +100,6 @@ function! ToggleQuickfix()
 endfunction
 
 nnoremap <leader>c :call ToggleQuickfix()<CR>
-
-function! GetFunctionsInFile()
-
-    cexpr []
-
-    let l:ft = &filetype
-
-    let l:patterns = {
-                \ 'python': '^def\s\+',
-                \ 'javascript': '^\s*function\s\+',
-                \ 'typescript': '^\s*function\s\+',
-                \ 'c': '^\s*\(\w\+\s\+\)\?\w\+\s*(.*)\s*{',
-                \ 'cpp': '^\s*\(\w\+\s\+\)\?\w\+\s*(.*)\s*{',
-                \ 'vim': '^function\s\+',
-                \ 'lua': '^function\s\+',
-                \ 'ps1': '^function\s\+'
-                \ }
-    
-    let l:pattern = get(l:patterns, l:ft, '^function')
-
-	execute 'vimgrep /' . l:pattern . '/j %'
-
-	copen
-endfunction
-
-nnoremap <leader>gf :call GetFunctionsInFile()<CR>
 
 " Add all conflicted files to quickfix, safely handling spaces
 function! GitConflictsQuickfix()
@@ -252,32 +159,6 @@ nnoremap <Leader>w :cprevious<CR>
 nnoremap <Leader>s :cnext<CR>
 
 nnoremap cf :make<CR><Enter><Leader>c
-
-" +  Add the current file to the buffer list, and go to the next file entry.
-"function! NetrwBufAdd(isLocal)
-    "let l:filespec = netrw#Call('NetrwFile', netrw#Call('NetrwGetWord'))
-    "if filereadable(l:filespec)
-        "execute 'badd' ingo#compat#fnameescape(l:filespec)
-    "endif
-    "execute 'normal!' (b:netrw_liststyle == netrw#Expose('WIDELIST') ? 'W' : 'j')
-    "return ''
-"endfunction
-"
-"" -  Remove file buffer if it exists
-"function! NetrwBufRemove(isLocal)
-    "let l:filespec = netrw#Call('NetrwFile', netrw#Call('NetrwGetWord'))
-    "let l:buf = bufnr(fnameescape(l:filespec))
-    "if l:buf > 0
-        "execute 'bdelete' l:buf
-    "endif
-    "execute 'normal!' (b:netrw_liststyle == netrw#Expose('WIDELIST') ? 'W' : 'k')
-    "return ''
-"endfunction
-"
-"let g:Netrw_UserMaps = [
-"\   ['<Tab>', 'NetrwBufAdd'],
-"\   ['<S-Tab>', 'NetrwBufRemove'],
-"\]
 
 " Add current file to buffer list and move to next entry
 function! NetrwBufAdd(isLocal)
@@ -343,4 +224,3 @@ inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
 " --@main-end/
-
