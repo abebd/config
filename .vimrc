@@ -39,6 +39,11 @@ set expandtab
 set ignorecase
 set ffs=unix,dos
 set clipboard=unnamedplus
+hi Normal ctermbg=NONE guibg=NONE
+set lazyredraw
+set ttyfast
+set synmaxcol=200
+set updatetime=1000
 
 hi Normal ctermbg=NONE guibg=NONE
 hi NonText ctermbg=NONE guibg=NONE
@@ -78,20 +83,22 @@ set noshowmode " lightline thing to remove '-- INSERT --' at bottom of screen
 colorscheme molokai
 
 let g:gruvbox_material_background = 'hard'
->>>>>>> e696d86 (vim: lightline)
 
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
-let g:ale_set_quickfix = 0
+let g:ale_set_quickfix = 1
 let g:ale_set_loclist = 1
 
 let g:ale_linters = {
 \   'python': ['ruff'],
+\   'sql': ['sqlfluff'],
 \}
 let g:ale_fixers = {
 \   'python': ['ruff'],
 \}
+
+let g:ale_sql_sqlfluff_options = '--dialect tsql'
 
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 
