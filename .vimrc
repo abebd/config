@@ -16,6 +16,7 @@ call plug#begin()
     Plug 'junegunn/fzf.vim'
     "Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'dense-analysis/ale'
+    Plug 'wellle/context.vim'
 
 	"themes
     Plug 'sainnhe/gruvbox-material'
