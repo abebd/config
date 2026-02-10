@@ -17,6 +17,7 @@ call plug#begin()
     "Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'dense-analysis/ale'
     Plug 'wellle/context.vim'
+    Plug 'itchyny/lightline.vim'
 
 	"themes
     Plug 'sainnhe/gruvbox-material'
@@ -39,6 +40,17 @@ set ignorecase
 set ffs=unix,dos
 set clipboard=unnamedplus
 
+hi Normal ctermbg=NONE guibg=NONE
+hi NonText ctermbg=NONE guibg=NONE
+hi EndOfBuffer ctermbg=NONE guibg=NONE
+hi LineNr ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
+
+set lazyredraw
+set ttyfast
+set synmaxcol=200
+set updatetime=1000
+
 " --@gui/
 set guifont=Consolas:h14
 set guioptions-=m
@@ -48,6 +60,25 @@ set encoding=utf-8
 set fileencoding=utf-8
 set nowrap
 set autoindent
+set termguicolors
+
+let g:lightline = {
+      \ 'colorscheme': 'molokai',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
+
+set noshowmode " lightline thing to remove '-- INSERT --' at bottom of screen
+
+colorscheme molokai
+
+let g:gruvbox_material_background = 'hard'
+>>>>>>> e696d86 (vim: lightline)
 
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -63,12 +94,10 @@ let g:ale_fixers = {
 \}
 
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-hi Normal ctermbg=NONE guibg=NONE
-hi NonText ctermbg=NONE guibg=NONE
-hi EndOfBuffer ctermbg=NONE guibg=NONE
-hi LineNr ctermbg=NONE guibg=NONE
-hi SignColumn ctermbg=NONE guibg=NONE
 
+let g:ale_sql_sqlfluff_options = '--dialect tsql'
+
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 
 let g:rustfmt_autosave = 1
  
